@@ -20,3 +20,8 @@ Route::get('/login', function()
 {
     return Redirect::to(Facebook::getLoginUrl()); 
 });
+
+Route::get('/facebook/login', function()
+    {
+        return "Oi mae :D";
+    });
