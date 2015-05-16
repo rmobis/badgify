@@ -59,5 +59,5 @@ Route::get('/facebook/login', function()
 
     Facebook::auth()->login($user);
 
-    return $token;
+    return dd($facebook_user);
     });
