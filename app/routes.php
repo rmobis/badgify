@@ -45,6 +45,10 @@ Route::get('/facebook/login', function()
     // Setting the access token
     Facebook::getAccessToken($token);
 
+    // Getting some basic user info
+    $user = User::createOrUpdateFacebookObject($facebook_user);
+
+    Facebook::auth()->login($user);
 
     return $token;
 });
