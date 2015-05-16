@@ -55,9 +55,9 @@ Route::get('/facebook/login', function()
         return Redirect::to('/')->with('error', $e->getPrevious()->getMessage());
     }
 
-    $user = User::createOrUpdateFacebookObject($facebook_user);
+//    $user = User::createOrUpdateFacebookObject($facebook_user);
 
-    Facebook::auth()->login($user);
+//    Facebook::auth()->login($user);
 
     return dd($facebook_user);
     });
