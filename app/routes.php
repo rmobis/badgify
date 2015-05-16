@@ -12,6 +12,39 @@ Route::get('/login', function()
 
 Route::get('/facebook/login', function()
 {
-    $token = Facebook::getTokenFromRedirect();
+    try
+    {
+        $token = Facebook::getTokenFromRedirect();
+
+        if (!$token)
+        {
+            return "Error obtaining token!";
+        }
+    }
+    catch (FacebookQueryBuilderException $e)
+    {
+        // Facebook query builder error!
+        return $e->getPrevious()->getMessage();
+    }
+
+
+    // If the token is short lived, we'll extend it
+    // Ref: https://developers.facebook.com/docs/facebook-login/access-tokens#extending
+    if (!$token->isLongLived())
+    {
+        try
+        {
+            $token = $token->extend();
+        }
+        catch (FacebookQueryBuilderException $e)
+        {
+            return Redirect::to('/')->with('error', $e->getPrevious()->getMessage());
+        }
+    }
+
+    // Setting the access token
+    Facebook::getAccessToken($token);
+
+
     return $token;
 });
