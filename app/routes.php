@@ -46,9 +46,18 @@ Route::get('/facebook/login', function()
     Facebook::setAccessToken($token);
 
     // Getting some basic user info
+    try
+    {
+        $facebook_user = Facebook::object('me')->fields('id','name')->get();
+    }
+    catch (FacebookQueryBuilderException $e)
+    {
+        return Redirect::to('/')->with('error', $e->getPrevious()->getMessage());
+    }
+
     $user = User::createOrUpdateFacebookObject($facebook_user);
 
     Facebook::auth()->login($user);
 
     return $token;
-});
+    });
