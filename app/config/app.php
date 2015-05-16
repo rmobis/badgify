@@ -121,7 +121,10 @@ return array(
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
         'Illuminate\Workbench\WorkbenchServiceProvider',
+
+        // Packages
         'SammyK\LaravelFacebookSdk\LaravelFacebookSdkServiceProvider',
+        'Way\Generators\GeneratorsServiceProvider',
 
 	),
 
