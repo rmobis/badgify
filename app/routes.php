@@ -60,4 +60,10 @@ Route::get('/facebook/login', function()
 //    Facebook::auth()->login($user);
 
     return dd($facebook_user);
-    });
+});
+
+Route::get('/posts/{count}', function()
+{
+    return "I'll list all the posts!";
+});
+
