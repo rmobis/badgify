@@ -3,7 +3,7 @@
 @section('additional')
     function onLogin(response) {
       if (response.status == 'connected') {
-        top.location = "https://badgify.rmob.is/posts/10"
+        top.location = "https://badgify.rmob.is/posts/10";
 
       }
     }
