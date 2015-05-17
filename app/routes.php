@@ -13,7 +13,7 @@ Route::post('/', function()
 
 Route::get('/login', function()
 {
-    return Redirect::to(Facebook::getLoginUrl()); 
+    return Redirect::to(Facebook::getLoginUrl());
 });
 
 Route::get('/facebook/login', function()
@@ -50,7 +50,6 @@ Route::get('/facebook/login', function()
 
     // Setting the access token
     Facebook::setAccessToken($token);
-    Session::put('facebook_access_token', (string) $token);
 
     // Getting some basic user info
     try
@@ -62,34 +61,75 @@ Route::get('/facebook/login', function()
         return Redirect::to('/')->with('error', $e->getPrevious()->getMessage());
     }
 
-//    $user = User::createOrUpdateFacebookObject($facebook_user);
+    $user = User::createOrUpdateFacebookObject($facebook_user);
 
-//    Facebook::auth()->login($user);
+    Facebook::auth()->login($user);
+    $user = Auth::user();
+    $user->access_token = $token;
+    $user->save();
 
-    return Redirect::to("/posts/10");
+    return Redirect::to('/posts/10');
 });
 
-Route::get('/posts/{count}', function($count)
-{
-    $token = Session::get('facebook_access_token');
-    Facebook::setAccessToken($token);
+Route::get('/posts/{count}', function($count) {
+    $user = Auth::user();
+    Facebook::setAccessToken($user->access_token);
 
 	try {
-		$posts = Facebook::object('me/feed')->with(['with' => 'location',
+		$posts = Facebook::object('me/feed')->with([/*'with' => 'location',*/
 		'limit' => $count])->get();
 	} catch (\SammyK\FacebookQueryBuilder\FacebookQueryBuilderException $e) {
 		dd($e->getPrevious()->getMessage());
 	}
+dd($posts);
+    $achievsDone = $user->achievements()->wherePivot('done', true)->get();
+    $achievsNotDone = Achievement::whereNotIn('id', $achievsDone->lists('id'))->get();
 
-	foreach ($posts as $post)
-	{
-		if ($post->has('message'))
-		{
-			print $post['message'].'<br>';
-			$place = Facebook::object($post['place']['id'])->get();
-			print $post['place']['name'].' - '.$place['category'];
-			print "<br>";
+    foreach ($achievsNotDone as $achiev) {
+        foreach ($posts as $post) {
+            if ($post->has('message')) {
+                if ($achiev->validateGraphObject($post)) {
+                    $piv = $achiev->users()->where('users.id', $user->id)->first();
+
+                    if ($piv === null) {
+                        $user->achievements()->attach($achiev->id, [
+                            'done' => ($achiev->amount == 1),
+                            'amount' => 1
+                        ]);
+
+                        $user->save();
+                    } else {
+                        $piv->pivot->amount += 1;
+
+                        if ($piv->pivot->amount >= $achiev->amount) {
+                            $piv->pivot->done = true;
+                        }
+
+                        $piv->save();
+                    }
+                }
+            }
 		}
 	}
 
+    $user->touch();
+});
+
+Route::get('api/user/achievements', function () {
+    return Auth::user()
+        ->achievements()
+        ->wherePivot('done', true)
+        ->get()
+        ->lists('id');
+});
+
+Route::get('api/user/badges', function () {
+    return Auth::user()
+        ->badges()
+        ->get()
+        ->lists('id');
+});
+
+Route::get('api/data', function () {
+    return Badge::with('achievements')->get();
 });
