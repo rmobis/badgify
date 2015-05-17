@@ -38,7 +38,7 @@ Route::post('/', function()
 
 Route::get('/facebook/login', function()
 {
-	session_start();
+	dd(Input::all());
     try
     {
         $token = Facebook::getTokenFromRedirect();
