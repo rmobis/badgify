@@ -8,7 +8,7 @@ Route::get('/', function()
 
 Route::post('/', function()
 {
-	return Redirect::to('/');
+	return Redirect::to('/login');
 });
 
 Route::get('/login', function()
