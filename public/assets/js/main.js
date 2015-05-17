@@ -47,6 +47,7 @@ var app = angular.module('app', [
   '$stateParams',
   function($scope, $rootScope, $http, $stateParams) {
 
+    console.log('hey');
 
 }])
 
