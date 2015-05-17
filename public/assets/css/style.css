@@ -22,6 +22,10 @@ a,
   color: #f39c12;
 }
 
+.yellow b {
+  font-size: 1.2em;
+}
+
 a:hover {
   text-decoration: none;
   color: #d35400;
