@@ -21,7 +21,7 @@ Route::get('/', function()
 
 Route::post('/', function()
 {
-	$login = Facebook::getLoginUrl(['email', 'user_likes', 'user_posts']);
+	$login = Facebook::getLoginUrl(['email', 'user_likes', 'user_posts'], 'https://badify.rmob.is/facebook/login/');
 
 	return '<a href="' . $login . '">Log in with Facebook!</a>';
 
