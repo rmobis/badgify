@@ -10,7 +10,7 @@ var app = angular.module('app', [
   function($stateProvider, $urlRouterProvider, $locationProvider) {
 
   /* ROUTES */
-  $locationProvider.html5Mode(true);
+  //$locationProvider.html5Mode(true);
   $urlRouterProvider.otherwise('/');
   $stateProvider
     .state('home', {

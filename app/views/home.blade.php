@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width">
   <link rel="profile" href="http://gmpg.org/xfn/11">
   <title>Checkpoint</title>
-  <base href="/"></base>
   <!--[if lt IE 9]>
   <script src="assets/js/html5.js"></script>
   <![endif]-->
@@ -33,7 +32,7 @@
               <a ui-sref="home"><span class="yellow"><b>3</b></span> Friends</a>
             </li>
             <li ui-sref-active="active">
-              <a ui-sref="badges"><span class="yellow"><b>1</b></span> Badges</a>
+              <a ui-sref="badges"><span class="yellow"><b>2</b></span> Badges</a>
             </li>
           </ul>
         </div>
