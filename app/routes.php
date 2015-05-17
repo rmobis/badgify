@@ -44,6 +44,7 @@ Route::get('/facebook/login', function()
 
     // Setting the access token
     Facebook::setAccessToken($token);
+    Session::put('facebook_access_token', (string) $token);
 
     // Getting some basic user info
     try
@@ -59,5 +60,30 @@ Route::get('/facebook/login', function()
 
 //    Facebook::auth()->login($user);
 
-    return dd($facebook_user);
-    });
+    return Redirect::to("/posts/10");
+});
+
+Route::get('/posts/{count}', function($count)
+{
+    $token = Session::get('facebook_access_token');
+    Facebook::setAccessToken($token);
+
+	try {
+		$posts = Facebook::object('me/feed')->with(['with' => 'location',
+		'limit' => $count])->get();
+	} catch (\SammyK\FacebookQueryBuilder\FacebookQueryBuilderException $e) {
+		dd($e->getPrevious()->getMessage());
+	}
+
+	foreach ($posts as $post)
+	{
+		if ($post->has('message'))
+		{
+			print $post['message'].'<br>';
+			$place = Facebook::object($post['place']['id'])->get();
+			print $post['place']['name'].' - '.$place['category'];
+			print "<br>";
+		}
+	}
+
+});
