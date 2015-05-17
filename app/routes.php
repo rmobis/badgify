@@ -117,7 +117,8 @@ Route::get('/posts/{count}', function($count)
 
 });
 
-Route::get('/facebook/callback', function(SammyK\LaravelFacebookSdk\LaravelFacebookSdk $fb) {
+Route::get('/facebook/callback', function() {
+	$fb = SammyK\LaravelFacebookSdk\LaravelFacebookSdk();
 	try {
 		$token = $fb
 			->getRedirectLoginHelper()
