@@ -79,7 +79,7 @@ Route::get('/posts/{count}', function($count) {
 	} catch (\SammyK\FacebookQueryBuilder\FacebookQueryBuilderException $e) {
 		dd($e->getPrevious()->getMessage());
 	}
-dd($posts);
+
     $achievsDone = $user->achievements()->wherePivot('done', true)->get();
     $achievsNotDone = Achievement::whereNotIn('id', $achievsDone->lists('id'))->get();
 
