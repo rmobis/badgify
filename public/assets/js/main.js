@@ -47,6 +47,24 @@ var app = angular.module('app', [
   '$stateParams',
   function($scope, $rootScope, $http, $stateParams, $state) {
 
+    $http.get('api/data')
+    .then(function(response) {
+      $scope.category = response.data[0];
+      $scope.badges = $scope.category.badges;
+      console.log($scope.badges);
+    });
+
+    $http.get('api/user/badges')
+    .then(function(response) {
+      $scope.badgesDone = response.data;
+      console.log($scope.badgesDone);
+      $scope.checkBadge = function(id) {
+        return !$scope.badgesDone.reduce(
+          function(memo, v) {
+            return memo || v.id == id
+          }, $scope.badgesDone[0].id == id);
+      };
+    });
 }])
 
 .controller('CategoryController', [
@@ -54,11 +72,44 @@ var app = angular.module('app', [
   '$rootScope',
   '$http',
   '$stateParams',
-function($scope, $rootScope, $http, $stateParams, $state) {
+  '$interval',
+function($scope, $rootScope, $http, $stateParams, $state, $interval) {
 
-  $('.badge-custom-achieves').children('li').click(function(e) {
-    $(this).children('.achieve-description').slideToggle();
+  $http.get('api/data')
+  .then(function(response) {
+    $scope.category = response.data[0];
+    $scope.badges = $scope.category.badges;
+    console.log($scope.badges);
   });
 
-}]);
+  $http.get('api/user/badges')
+  .then(function(response) {
+    $scope.badgesDone = response.data;
+    console.log($scope.badgesDone);
+    $scope.checkBadge = function(id) {
+      return !$scope.badgesDone.reduce(
+        function(memo, v) {
+          return memo || v.id == id
+        }, $scope.badgesDone[0].id == id);
+    };
+  });
 
+  $http.get('api/user/achievements')
+  .then(function(response) {
+    $scope.achievs = response.data;
+    console.log($scope.achievs);
+    $scope.checkAchiev = function(id) {
+      return !$scope.achievs.reduce(
+        function(memo, v) {
+          return memo || v.id == id
+        }, $scope.achievs[0].id == id);
+    };
+    $scope.checkDate = function(id) {
+      return (($scope.achievs.filter(function(v) { return v.id !== id }))[0]).achieved_at;
+    };
+  });
+
+  $scope.collapse = function($event) {
+    $($event.currentTarget.children[2]).slideToggle()
+  }
+}]);

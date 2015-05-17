@@ -60,6 +60,7 @@ header {
 
 .page .background {
   background: url('../img/categories/facebook.png') no-repeat;
+  background-size: cover;
 }
 
 /* .profile-pic {

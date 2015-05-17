@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 
 Route::get('/', function() {
     if (!Auth::user()) {
@@ -8,7 +9,6 @@ Route::get('/', function() {
 
 	return View::make('home');
 });
-
 
 Route::get('/login', function() {
     return Redirect::to(Facebook::getLoginUrl());
@@ -92,6 +92,7 @@ Route::get('/posts/{count}', function($count) {
                     if ($piv === null) {
                         $user->achievements()->attach($achiev->id, [
                             'done' => ($achiev->amount == 1),
+                            'achieved_at' => Carbon::now(),
                             'amount' => 1
                         ]);
 
@@ -101,6 +102,7 @@ Route::get('/posts/{count}', function($count) {
 
                         if ($piv->pivot->amount >= $achiev->amount) {
                             $piv->pivot->done = true;
+                            $piv->pivot->achieved_at = Carbon::now();
                         }
 
                         $piv->save();
@@ -110,24 +112,61 @@ Route::get('/posts/{count}', function($count) {
 		}
 	}
 
+    $badgesDone = $user->badges()->get()->lists('id');
+    $badgesNotDone = Badge::whereNotIn('id', $badgesDone)->with('achievements')->get();
+    $achievsDone = $user->achievements()->wherePivot('done', true)->get()->lists('id');
+
+    foreach ($badgesNotDone as $badge) {
+        $completed = true;
+        foreach ($badge->achievements as $achiev) {
+            if (! in_array($achiev->id, $achievsDone)) {
+                $completed = false;
+                break;
+            }
+        }
+
+        if ($completed) {
+            $user->badges()->attach($badge->id, [
+                'achieved_at' => Carbon::now()
+            ]);
+        }
+    }
+
     $user->touch();
+
+    return Redirect::to('/');
 });
 
 Route::get('api/user/achievements', function () {
     return Auth::user()
         ->achievements()
+        ->withPivot('achieved_at')
         ->wherePivot('done', true)
         ->get()
-        ->lists('id');
+        ->map(function ($v) {
+            return [
+                'id' => $v->id,
+                'achieved_at' => $v->pivot->achieved_at
+            ];
+        });
 });
 
 Route::get('api/user/badges', function () {
     return Auth::user()
         ->badges()
+        ->withPivot('achieved_at')
         ->get()
-        ->lists('id');
+        ->map(function ($v) {
+            return [
+                'id' => $v->id,
+                'achieved_at' => $v->pivot->achieved_at
+            ];
+        });
 });
 
 Route::get('api/data', function () {
-    return Badge::with('achievements')->get();
+    return Category::with(['badges', 'badges.achievements'])->get();
 });
+
+
+//array.reduce(function(memo, v) { return memo || v.id == id }, array[0].id == id);

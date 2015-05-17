@@ -13,20 +13,20 @@
     <section class="category">
       <a ui-sref="category">
         <div class="category-background">
-          <div class="category-name"><h2>Facebook Hackathon 2015</h2></div>
-          <div class="category-stats"><strong>1/3</strong> Completed</div>
+          <div class="category-name"><h2>{{category.name}}</h2></div>
+          <div class="category-stats"><strong>{{badgesDone.length}}/{{badges.length}}</strong> Completed</div>
         </div>
         <div class="category-badges">
             <div class="row">
-              <div class="col-xs-4 badge-custom-image">
-                <img class="pull-right" src="assets/img/badges/badgeHackathon1.png" height="110" width="110">
+              <div class="col-xs-4 badge-custom-image" ng-repeat="badge in badges" ng-class="{ 'badge-blocked' : checkBadge(badge.id) }">
+                <img ng-class="{'pull-right' : badge.id == 1, 'center-block' : badge.id == 2, 'pull-left' : badge.id == 3}" src="assets/img/badges/{{badge.icon}}" height="110" width="110">
+              </div>
+              <!-- <div class="col-xs-4 badge-custom-image">
+                <img class="center-block" src="assets/img/badges/hackathon-badge-2.png" height="110" width="110">
               </div>
               <div class="col-xs-4 badge-custom-image">
-                <img class="center-block" src="assets/img/badges/badgeHackathon2.png" height="110" width="110">
-              </div>
-              <div class="col-xs-4 badge-custom-image">
-                <img class="pull-left" src="assets/img/badges/badgeHackathon3.png" height="110" width="110">
-              </div>
+                <img class="pull-left" src="assets/img/badges/hackathon-badge-3.png" height="110" width="110">
+              </div> -->
           </div>
         </div>
       </a>
