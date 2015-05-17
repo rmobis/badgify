@@ -3,7 +3,7 @@
 
 Route::get('/', function()
 {
-	$login = Facebook::getLoginUrl(['email', 'user_likes', 'user_posts'], url('https://badgify.rmob.is/facebook/login'));
+	$login = Facebook::getLoginUrl(['email', 'user_likes', 'user_posts']);
 
 	return '<a href="' . $login . '">Log in with Facebook!</a>';
 });
