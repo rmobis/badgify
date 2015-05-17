@@ -3,7 +3,7 @@
 
 Route::get('/', function()
 {
-	$login = Facebook::getLoginUrl(['email', 'user_likes', 'user_posts']);
+	$login = Facebook::getLoginUrl(['email', 'user_likes', 'user_posts'], url('https://badgify.rmob.is/facebook/callback'));
 
 	return '<a href="' . $login . '">Log in with Facebook!</a>';
 });
@@ -23,7 +23,7 @@ Route::get('/', function()
 
 Route::post('/', function()
 {
-	$login = Facebook::getLoginUrl(['email', 'user_likes', 'user_posts'], url('https://badgify.rmob.is/facebook/login'));
+	$login = Facebook::getLoginUrl(['email', 'user_likes', 'user_posts'], url('https://badgify.rmob.is/facebook/callback'));
 
 	return '<a href="' . $login . '">Log in with Facebook!</a>';
 
@@ -115,4 +115,15 @@ Route::get('/posts/{count}', function($count)
 		}
 	}
 
+});
+
+Route::get('/facebook/callback', function(SammyK\LaravelFacebookSdk\LaravelFacebookSdk $fb) {
+	try {
+		$token = $fb
+			->getRedirectLoginHelper()
+			->getAccessToken();
+	} catch (FacebookSDKException $e) {
+		// Failed to obtain access token
+		dd($e->getMessage());
+	}
 });
