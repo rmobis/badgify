@@ -1,0 +1,315 @@
+/* GLOBAL */
+html, body {
+  height: 100%;
+}
+
+.wrapper {
+  position:relative;
+  min-height:100%;
+}
+
+.container {
+  position: relative;
+}
+
+.main-content {
+  margin-top: 50px;
+}
+
+a,
+.yellow {
+  transition: all .3s;
+  color: #f39c12;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #d35400;
+}
+
+/* NAVBAR */
+.navbar {
+  margin-bottom: 0;
+  border: none;
+}
+
+.navbar-header {
+  font-weight: bold;
+}
+
+/* HEADER */
+header {
+  position: relative;
+  text-align: center;
+  margin-bottom: 70px;
+}
+
+.page {
+  margin-bottom: 15px;
+}
+
+.background {
+  height: 200px;
+  background: url('../img/background.png') no-repeat;
+  background-size: cover;
+}
+
+.page .background {
+  background: url('../img/categories/facebook.png') no-repeat;
+}
+
+/* .profile-pic {
+  position: absolute;
+  bottom: 70px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 158px;
+  height: 158px;
+  border-radius: 20%;
+  background: #bbb;
+  border: 5px solid white;
+} */
+
+.profile-pic {
+  position: absolute;
+  bottom: -30%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 158px;
+  height: 158px;
+  border-radius: 20%;
+  background: #bbb;
+  border: 5px solid white;
+  overflow: hidden;
+}
+
+/* .profile-name {
+  position: absolute;
+  bottom: 80px;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, -70%);
+} */
+
+.profile-name {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, 0);
+}
+
+.profile-name h1 {
+  font-size: 2em;
+  margin-bottom: 0;
+  text-shadow: 1px 1px 1px rgba(0,0,0,.5);
+}
+
+.profile-name a {
+  color: white;
+  text-decoration: none;
+  transition: all .3s;
+}
+
+.profile-name a:hover {
+  color: #d35400;
+}
+
+.profile-stats {
+  margin-top: 70px;
+  color: #aeb4b6;
+}
+
+.profile-stats strong {
+  display: block;
+  color: #4e595d;
+  font-size: 36px;
+  line-height: 0.9em;
+}
+
+/* MAIN */
+main {
+  padding-bottom: 65px;
+}
+
+.category {
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.3);
+  border-radius: 5px;
+  margin: 15px 0 30px 0;
+}
+
+.category-background {
+  position: relative;
+  height: 120px;
+  background: url('../img/categories/facebook.png') no-repeat;
+}
+
+.category-name {
+  position: absolute;
+  bottom: 10px;
+  left: 20px;
+}
+
+.category-name h2 {
+  word-wrap: break-word;
+  margin-bottom: 0;
+  color: white;
+  text-shadow: 1px 1px 1px rgba(0,0,0,.5);
+}
+
+.page-stats {
+  position: absolute;
+  bottom: 20px;
+  right: 15px;
+  text-align: right;
+  color: #aeb4b6;
+}
+
+.category-stats {
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
+  text-align: right;
+  color: #aeb4b6;
+}
+
+.category-stats strong,
+.page-stats strong {
+  display: block;
+  color: white;
+  font-size: 18px;
+  line-height: 1em;
+}
+
+.category-badges {
+  padding: 30px;
+}
+
+.category-badge {
+  width: 70px;
+  height: 70px;
+  background: #bbb;
+  border-radius: 50%;
+}
+
+/* PAGE HOME */
+.feed-item {
+  padding: 15px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.feed-item:last-child {
+  border-bottom: none;
+}
+
+.feed-item-image {
+  overflow: hidden;
+  width: 40px;
+  height: 40px;
+  border-radius: 20%;
+  background: #bbb;
+}
+
+.feed-item-container h3 {
+  margin-top: 10px;
+}
+
+.feed-item-time {
+  color: #aeb4b6;
+  font-size: 0.9em;
+}
+
+/* PAGE BADGES */
+.page-title {
+  position: absolute;
+  bottom: 20px;
+  color: white;
+  text-shadow: 1px 1px 1px rgba(0,0,0,.5);
+}
+
+.page-title h1 {
+  margin-bottom: 0;
+}
+
+.category-description {
+  margin-top: 15px;
+}
+
+.badge-custom {
+  margin-bottom: 30px;
+}
+
+.badge-custom-title {
+  margin-bottom: 15px;
+}
+
+.badge-custom-image {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.badge-custom-image img {
+  border-radius: 50%;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.3);
+  border: 5px solid white;
+}
+
+.badge-custom-achieves {
+  margin-bottom: 0;
+  list-style: none;
+}
+
+.badge-custom-achieves li {
+  cursor: pointer;
+}
+
+.badge-custom-achieves li.blocked {
+  color: #aeb4b6;
+}
+
+.achieve-name {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.achieve-date {
+
+}
+
+.achieve-description {
+  margin-top: 15px;
+  display: none;
+}
+
+/* FOOTER */
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 15px;
+  background-color: #333;
+  color: white;
+}
+
+/* MEDIA QUERIES */
+@media (min-width: 750px) {
+  .profile-name h1 {
+    font-size: 3em;
+  }
+  .category-badge {
+    width: 120px;
+    height: 120px;
+  }
+  .badge-custom-image {
+    text-align: left;
+    margin-bottom: 0;
+  }
+  .feed-item-image {
+    width: 80px;
+    height: 80px;
+  }
+}
