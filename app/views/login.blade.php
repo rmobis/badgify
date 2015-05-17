@@ -3,8 +3,7 @@
 @section('additional')
     function onLogin(response) {
       if (response.status == 'connected') {
-        var welcomeBlock = document.getElementById('fb-welcome');
-        welcomeBlock.innerHTML = response;
+        top.location = "https://badgify.rmob.is/posts/10"
 
       }
     }
