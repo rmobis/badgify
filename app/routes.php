@@ -8,11 +8,18 @@ Route::get('/', function()
 
 Route::post('/', function()
 {
-	return View::make('login');
+	$helper = Facebook::getRedirectLoginHelper();
+	$permissions = ['email', 'user_likes', 'user_posts']; // optional
+	$loginUrl = $helper->getLoginUrl('https://{your-website}/login-callback.php', $permissions);
+
+	return '<a href="' . $loginUrl . '">Log in with Facebook!</a>';
+
+	// return View::make('login');
 });
 
 Route::get('/login', function()
 {
+
     return Redirect::to(Facebook::getLoginUrl()); 
 });
 
