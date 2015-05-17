@@ -23,7 +23,7 @@ Route::get('/', function()
 
 Route::post('/', function()
 {
-	$login = Facebook::getLoginUrl(['email', 'user_likes', 'user_posts'], 'badgify.rmob.is/facebook/login/');
+	$login = Facebook::getLoginUrl(['email', 'user_likes', 'user_posts'], 'https://badgify.rmob.is/facebook/login/');
 
 	return '<a href="' . $login . '">Log in with Facebook!</a>';
 
@@ -38,6 +38,7 @@ Route::post('/', function()
 
 Route::get('/facebook/login', function()
 {
+	session_start();
     try
     {
         $token = Facebook::getTokenFromRedirect();
