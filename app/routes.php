@@ -3,38 +3,11 @@
 
 Route::get('/', function()
 {
-	$login = Facebook::getLoginUrl(['email', 'user_likes', 'user_posts'], url('https://badgify.rmob.is/facebook/callback'));
+	$login = Facebook::getLoginUrl(['email', 'user_likes', 'user_posts'], url('https://badgify.rmob.is/facebook/login'));
 
 	return '<a href="' . $login . '">Log in with Facebook!</a>';
 });
 
-//Route::post('/', function()
-//{
-//	$jsHelper = Facebook::getJavaScriptHelper();
-//
-//	dd($jsHelper);
-////	$permissions = ['email', 'user_likes']; // optional
-////	$loginUrl = $helper->getLoginUrl('https://{your-website}/login-callback.php', $permissions);
-////
-////	echo '<a href="' . $loginUrl . '">Log in with Facebook!</a>';
-//
-//	// return View::make('login');
-//});
-
-Route::post('/', function()
-{
-	$login = Facebook::getLoginUrl(['email', 'user_likes', 'user_posts'], url('https://badgify.rmob.is/facebook/callback'));
-
-	return '<a href="' . $login . '">Log in with Facebook!</a>';
-
-//	$helper = Facebook::getLoginUrl();
-//	$permissions = ['email', 'user_likes', 'user_posts']; // optional
-//	$loginUrl = $helper->getLoginUrl('https://{your-website}/login-callback.php', $permissions);
-//
-//	dd($loginUrl);
-
-    //return Redirect::to(Facebook::getLoginUrl());
-});
 
 Route::get('/facebook/login', function()
 {
