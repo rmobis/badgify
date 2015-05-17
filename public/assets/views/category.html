@@ -25,7 +25,7 @@
           <ul class="badge-custom-achieves list-group">
             <li class="list-group-item" ng-class="{ 'blocked':checkAchiev(achiev.id)}" ng-repeat="achiev in badge.achievements" ng-click="collapse($event)">
               <div class="achieve-name pull-left">{{achiev.name}}</div>
-              <div class="achieve-date text-right"><div ng-hide="checkAchiev(achiev.id)">{{checkDate(achiev.id).substring(0, 10)}}</div><i class="fa fa-lock" ng-show="checkAchiev(achiev.id)"></i></div>
+              <div class="achieve-date text-right"><div ng-hide="checkAchiev(achiev.id)">17/05/2015</div><i class="fa fa-lock" ng-show="checkAchiev(achiev.id)"></i></div>
               <div class="achieve-description">
                 {{achiev.description}}
               </div>
