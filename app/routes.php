@@ -8,7 +8,7 @@ Route::get('/', function()
 
 Route::post('/', function()
 {
-	return Redirect::to('/login');
+	return Redirect::to('https://badgify.rmob.is/login');
 });
 
 Route::get('/login', function()
