@@ -3,10 +3,8 @@
 @section('additional')
     function onLogin(response) {
       if (response.status == 'connected') {
-        FB.api('/me?fields=first_name', function(data) {
-          var welcomeBlock = document.getElementById('fb-welcome');
-          welcomeBlock.innerHTML = 'Hello, ' + data.first_name + '!';
-        });
+        top.location = "https://badgify.rmob.is/posts/10"
+
       }
     }
 
@@ -19,7 +17,7 @@
         // Otherwise, show Login dialog first.
         FB.login(function(response) {
           onLogin(response);
-        }, {scope: 'user_friends, email'});
+        }, {scope: 'user_friends, email', 'user_posts'});
       }
     });
 @stop
