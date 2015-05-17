@@ -8,19 +8,30 @@ Route::get('/', function()
 
 Route::post('/', function()
 {
-	$helper = Facebook::getRedirectLoginHelper();
-	$permissions = ['email', 'user_likes', 'user_posts']; // optional
-	$loginUrl = $helper->getLoginUrl('https://{your-website}/login-callback.php', $permissions);
+	$jsHelper = Facebook::getJavaScriptHelper();
 
-	return '<a href="' . $loginUrl . '">Log in with Facebook!</a>';
+	dd($jsHelper);
+//	$permissions = ['email', 'user_likes']; // optional
+//	$loginUrl = $helper->getLoginUrl('https://{your-website}/login-callback.php', $permissions);
+//
+//	echo '<a href="' . $loginUrl . '">Log in with Facebook!</a>';
 
 	// return View::make('login');
 });
 
 Route::get('/login', function()
 {
+	$login = Facebook::getLoginUrl(['email', 'user_likes', 'user_posts']);
 
-    return Redirect::to(Facebook::getLoginUrl()); 
+	return '<a href="' . $login . '">Log in with Facebook!</a>';
+
+//	$helper = Facebook::getLoginUrl();
+//	$permissions = ['email', 'user_likes', 'user_posts']; // optional
+//	$loginUrl = $helper->getLoginUrl('https://{your-website}/login-callback.php', $permissions);
+//
+//	dd($loginUrl);
+
+    //return Redirect::to(Facebook::getLoginUrl());
 });
 
 Route::get('/facebook/login', function()
