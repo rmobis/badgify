@@ -11,7 +11,7 @@
           version    : 'v2.3'
         });
 
-        // ADD ADDITIONAL FACEBOOK CODE HERE
+        @yield('additional')
       };
 
       (function(d, s, id){
