@@ -1,5 +1,5 @@
-<?php
-/**
- * Created by: fbidu
- * In: 16/05/15
- */ 
+@extends('base')
+
+@section('content')
+    Loging you in...
+@stop
