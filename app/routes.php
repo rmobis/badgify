@@ -1,8 +1,16 @@
 <?php
 
+use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\Input;
+
 Route::get('/', function()
 {
 	return View::make('hello');
+});
+
+Route::post('/', function()
+{
+	return dd(Input::all());
 });
 
 Route::get('/login', function()
