@@ -19,7 +19,7 @@
         <div class="category-badges">
             <div class="row">
               <div class="col-xs-4 badge-custom-image" ng-repeat="badge in badges" ng-class="{ 'badge-blocked' : checkBadge(badge.id) }">
-                <img ng-class="{'pull-right' : badge.id == 1, 'center-block' : badge.id == 2, 'pull-left' : badge.id == 3}" src="assets/img/badges/{{badge.icon}}" height="110" width="110">
+                <img ng-class="{'pull-right' : badge.id == 1, 'center-block' : badge.id == 2, 'pull-left' : badge.id == 3}" ng-src="assets/img/badges/{{badge.icon}}" height="110" width="110">
               </div>
               <!-- <div class="col-xs-4 badge-custom-image">
                 <img class="center-block" src="assets/img/badges/hackathon-badge-2.png" height="110" width="110">

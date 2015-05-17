@@ -167,6 +167,3 @@ Route::get('api/user/badges', function () {
 Route::get('api/data', function () {
     return Category::with(['badges', 'badges.achievements'])->get();
 });
-
-
-//array.reduce(function(memo, v) { return memo || v.id == id }, array[0].id == id);
