@@ -36,7 +36,7 @@ var app = angular.module('app', [
   '$rootScope',
   '$http',
   '$stateParams',
-  function($scope, $rootScope, $http, $stateParams, $state) {
+  function($scope, $rootScope, $http, $stateParams) {
 
 }])
 
@@ -45,7 +45,7 @@ var app = angular.module('app', [
   '$rootScope',
   '$http',
   '$stateParams',
-  function($scope, $rootScope, $http, $stateParams, $state) {
+  function($scope, $rootScope, $http, $stateParams) {
 
     $http.get('api/data')
     .then(function(response) {
@@ -72,8 +72,7 @@ var app = angular.module('app', [
   '$rootScope',
   '$http',
   '$stateParams',
-  '$interval',
-function($scope, $rootScope, $http, $stateParams, $state, $interval) {
+function($scope, $rootScope, $http, $stateParams) {
 
   $http.get('api/data')
   .then(function(response) {
