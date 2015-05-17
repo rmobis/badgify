@@ -1,18 +1,16 @@
 <?php
 
 
-Route::get('/', function()
-{
-	return View::make('hello');
+Route::get('/', function() {
+    if (!Auth::user()) {
+        return Redirect::to('/login');
+    }
+
+	return View::make('home');
 });
 
-Route::post('/', function()
-{
-	return Redirect::to('/login');
-});
 
-Route::get('/login', function()
-{
+Route::get('/login', function() {
     return Redirect::to(Facebook::getLoginUrl());
 });
 
