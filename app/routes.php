@@ -71,6 +71,11 @@ Route::get('/facebook/login', function()
 
 Route::get('/posts/{count}', function($count) {
     $user = Auth::user();
+
+    if ($user == null) {
+        return Redirect::to('/login');
+    }
+
     Facebook::setAccessToken($user->access_token);
 
 	try {
