@@ -47,8 +47,24 @@ var app = angular.module('app', [
   '$stateParams',
   function($scope, $rootScope, $http, $stateParams) {
 
-    console.log('hey');
+    $http.get('/api/data')
+    .then(function(response) {
+      $scope.category = response.data[0];
+      $scope.badges = $scope.category.badges;
+      console.log($scope.badges);
+    });
 
+    $http.get('/api/user/badges')
+    .then(function(response) {
+      $scope.badgesDone = response.data;
+      console.log($scope.badgesDone);
+      $scope.checkBadge = function(id) {
+        return !$scope.badgesDone.reduce(
+          function(memo, v) {
+            return memo || v.id == id
+          }, $scope.badgesDone[0].id == id);
+      };
+    });
 }])
 
 .controller('CategoryController', [
